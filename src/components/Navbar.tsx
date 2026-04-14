@@ -9,22 +9,22 @@ const navItems = [
     label: 'Commercial',
     href: '/commercial',
     children: [
-      'Business Photography',
-      'Corporate Videography',
-      'Industrial & Construction',
-      'Builders',
-      'Pool Photography',
-      'Renovations',
-      'Events',
+      { label: 'Business Photography', href: '/commercial' },
+      { label: 'Corporate Videography', href: '/commercial' },
+      { label: 'Industrial & Construction', href: '/commercial' },
+      { label: 'Builders', href: '/commercial' },
+      { label: 'Pool Photography', href: '/commercial' },
+      { label: 'Renovations', href: '/commercial' },
+      { label: 'Events', href: '/commercial' },
     ],
   },
   {
     label: 'Residential',
     href: '/residential',
     children: [
-      'Real Estate Photography',
-      'Airbnb Photography',
-      'Floor Plans',
+      { label: 'Real Estate Photography', href: '/residential' },
+      { label: 'Airbnb Photography', href: '/residential' },
+      { label: 'Floor Plans', href: '/residential' },
     ],
   },
   { label: 'Drone Aerial', href: '/drone' },
@@ -78,7 +78,7 @@ export default function Navbar() {
             <div
               key={item.label}
               className="relative group"
-              onMouseEnter={() => item.children && setOpenDropdown(item.label)}
+              onMouseEnter={() => 'children' in item && item.children && setOpenDropdown(item.label)}
               onMouseLeave={() => setOpenDropdown(null)}
             >
               <Link
@@ -96,11 +96,11 @@ export default function Navbar() {
                 <div className="absolute top-full left-0 bg-white shadow-xl rounded-lg py-2 min-w-48 border border-gray-100 z-50">
                   {item.children.map((child) => (
                     <Link
-                      key={child}
-                      href={`${item.href}/${child.toLowerCase().replace(/\s+/g, '-')}`}
+                      key={child.label}
+                      href={child.href}
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#066aab] transition-colors"
                     >
-                      {child}
+                      {child.label}
                     </Link>
                   ))}
                 </div>
@@ -154,12 +154,12 @@ export default function Navbar() {
                   <div className="pl-6">
                     {item.children.map((child) => (
                       <Link
-                        key={child}
-                        href={`${item.href}/${child.toLowerCase().replace(/\s+/g, '-')}`}
+                        key={child.label}
+                        href={child.href}
                         className="block px-3 py-2 text-sm text-gray-600 hover:text-[#066aab]"
                         onClick={() => setMobileOpen(false)}
                       >
-                        {child}
+                        {child.label}
                       </Link>
                     ))}
                   </div>
