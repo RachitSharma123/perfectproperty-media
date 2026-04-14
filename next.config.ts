@@ -5,8 +5,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'image.pollinations.ai',
-        pathname: '/prompt/**',
+        hostname: 'images.unsplash.com',
       },
     ],
   },
